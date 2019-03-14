@@ -411,7 +411,8 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
           openedClass: modal.openedClass,
           windowTopClass: modal.windowTopClass,
           animation: modal.animation,
-          appendTo: modal.appendTo
+          appendTo: modal.appendTo,
+          appendAfter: modal.appendAfter
         });
 
         openedClasses.put(modalBodyClass, modalInstance);
@@ -438,7 +439,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
             backdropDomEl.attr('modal-animation', 'true');
           }
           $compile(backdropDomEl)(backdropScope);
-          $animate.enter(backdropDomEl, appendToElement);
+          $animate.enter(backdropDomEl, appendToElement, modal.appendAfter);
           if ($uibPosition.isScrollable(appendToElement)) {
             scrollbarPadding = $uibPosition.scrollbarPadding(appendToElement);
             if (scrollbarPadding.heightOverflow && scrollbarPadding.scrollbarWidth) {
@@ -493,7 +494,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
           // because it is needed by ngStyle to compute the zIndex property.
           modal.scope.$$topModalIndex = topModalIndex;
         }
-        $animate.enter($compile(angularDomEl)(modal.scope), appendToElement);
+        $animate.enter($compile(angularDomEl)(modal.scope), appendToElement, modal.appendAfter);
 
         openedWindows.top().value.modalDomEl = angularDomEl;
         openedWindows.top().value.modalOpener = modalOpener;
@@ -752,7 +753,8 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
                   ariaDescribedBy: modalOptions.ariaDescribedBy,
                   size: modalOptions.size,
                   openedClass: modalOptions.openedClass,
-                  appendTo: modalOptions.appendTo
+                  appendTo: modalOptions.appendTo,
+                  appendAfter: modalOptions.appendAfter
                 };
 
                 var component = {};
